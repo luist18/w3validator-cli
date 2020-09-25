@@ -21,7 +21,7 @@ $ yarn add global @luist18/w3v
 
 ## Documentation
 
-Read the [official docs](https://github.com/luist18/w3validator-cli/docs/commands.md) for usage and more information.
+Read the [official docs](https://github.com/luist18/w3validator-cli/blob/master/docs/commands.md) for usage and more information.
 
 ## Coming features
 
