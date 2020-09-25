@@ -1,6 +1,6 @@
 {
   "name": "@luist18/w3v",
-  "version": "0.1",
+  "version": "0.1.0",
   "description": "w3v CLI",
   "private": false,
   "bin": {
@@ -25,7 +25,8 @@
   "dependencies": {
     "axios": "^0.20.0",
     "colors": "^1.4.0",
-    "gluegun": "latest"
+    "gluegun": "latest",
+    "yargs-parser": "^18.1.2"
   },
   "devDependencies": {
     "jest": "^24.1.0",
