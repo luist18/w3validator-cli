@@ -1,21 +1,37 @@
 # w3validator-cli
 
-`w3v` is a command line tool to help you validate your HTML files through the [w3 validator website](https://validator.w3.org/).
+![npm](https://img.shields.io/npm/v/@luist18/w3v?logo=npm)
+![GitHub](https://img.shields.io/github/license/luist18/w3validator-cli?color=blue)
 
-## Installation
+Command line tool to help you validate your HTML files through the [w3 validator website](https://validator.w3.org/).
 
-### npm
+## Installing
 
-`npm install global @luist18/w3validator-cli`
+Using npm:
 
-### yarn
+```bash
+$ npm install -g @luist18/w3v
+```
 
-`yarn add global @luist18/w3validator-cli`
+Using yarn:
 
-### Usage
+```bash
+$ yarn add global @luist18/w3v
+```
 
-`w3v <filename>` where 
+## Documentation
 
-**TODO:**
+Read the [official docs](https://github.com/luist18/w3validator-cli/docs/commands.md) for usage and more information.
+
+## Coming features
 
 - [ ] Bulk file validation
+- [ ] Directory validation
+
+## Author
+
+[Luís Tavares](https://github.com/luist18)
+
+## License
+
+[MIT](LICENSE)
