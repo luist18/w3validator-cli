@@ -8,7 +8,7 @@
 2. [Features](#features)
 3. [Installing](#installing)
 4. [Commands](#commands)
-    4.1. [w3v](#w3v)
+    1. [w3v](#w3v)
 5. [License](#license)
 
 ## w3 validator description
@@ -45,7 +45,7 @@ The default output is `OK` or `FAILED`, if the file is successfully validated or
 
 #### Options
 
-`--all` provides a complete description of the errors if the file is not successfully validated.
+`--all` provides a complete description of the errors if the file or directory is not successfully validated.
 
 `--recursive` validates the `.html` and `.xhtml` files in the sub directories.
 
