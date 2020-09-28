@@ -1,6 +1,6 @@
 # w3validator-cli
 
-![npm](https://img.shields.io/npm/v/@luist18/w3v?logo=npm)
+[![npm](https://img.shields.io/npm/v/@luist18/w3v?logo=npm)](https://www.npmjs.com/package/@luist18/w3v)
 ![GitHub](https://img.shields.io/github/license/luist18/w3validator-cli?color=blue)
 
 Command line tool to help you validate your HTML files through the [w3 validator website](https://validator.w3.org/).
