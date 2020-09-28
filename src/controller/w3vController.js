@@ -1,4 +1,6 @@
 const axios = require('axios')
+const fs = require('fs')
+const path = require('path')
 const parser = require('../util/parser')
 
 const options = file => ({
@@ -46,4 +48,47 @@ async function single(file) {
   }
 }
 
-module.exports = { single }
+async function directory(directory, recursive) {
+  const files = await getFiles(directory, recursive)
+
+  if (files.length === 0)
+    return {
+      error: true,
+      message: 'No files were found'
+    }
+
+  const data = []
+
+  for (var filename of files) {
+    const file = await fs.promises.readFile(filename, 'utf-8')
+
+    const fileData = await single(file)
+
+    fileData.path = filename
+
+    data.push(fileData)
+  }
+
+  return data
+}
+
+async function getFiles(directory, recursive, files = []) {
+  const filenames = await fs.promises.readdir(directory)
+
+  for (var filename of filenames) {
+    const fullPath = path.join(directory, filename)
+
+    const stat = await fs.promises.stat(fullPath)
+
+    if (stat.isFile()) {
+      if (/\.x?html/i.test(filename))
+        files.push(fullPath)
+    } else if (stat.isDirectory() && recursive) {
+      await getFiles(fullPath, recursive, files)
+    }
+  }
+
+  return files
+}
+
+module.exports = { single, directory }

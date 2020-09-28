@@ -16,17 +16,12 @@ $ npm install -g @luist18/w3v
 Using yarn:
 
 ```bash
-$ yarn add global @luist18/w3v
+$ yarn global add @luist18/w3v
 ```
 
 ## Documentation
 
 Read the [official docs](https://github.com/luist18/w3validator-cli/blob/master/docs/commands.md) for usage and more information.
-
-## Coming features
-
-- [ ] Bulk file validation
-- [ ] Directory validation
 
 ## Author
 

@@ -1,7 +1,7 @@
 const fs = require('fs')
 const controller = require('../controller/w3vController')
 const { print } = require('gluegun')
-const colors = require('colors')
+require('colors')
 
 const command = {
   name: 'w3v',
@@ -18,14 +18,16 @@ const command = {
     }
 
     const verbosity = parameters.options.all | false
+    const recursive = parameters.options.recursive | false
     const path = parameters.first
 
     try {
       const stat = await fs.promises.stat(path)
 
       if (!stat.isFile()) {
-        error(`${path} is a directory`)
-        return
+        const data = await controller.directory(path, recursive)
+
+        displayBulk(data, verbosity)
       } else {
         const file = await fs.promises.readFile(path, 'utf-8')
 
@@ -57,22 +59,21 @@ function display(data, verbosity) {
     return
   }
 
-  info(
+  info((data.path !== undefined ? `${data.path} ` : '').red.concat
     (!data.errorCount
       ? ''
       : `❌ ${data.errorCount} `.concat(
-          data.errorCount === 1 ? 'error' : 'errors'
-        ).red
+        data.errorCount === 1 ? 'error' : 'errors'
+      ).red
     )
       .concat(data.errorCount > 0 && data.warningCount > 0 ? ' and ' : '')
       .concat(
         !data.warningCount
           ? ''
           : `⚠ ${data.warningCount} `.concat(
-              data.warningCount === 1 ? 'warning' : 'warnings'
-            ).brightYellow
+            data.warningCount === 1 ? 'warning' : 'warnings'
+          ).brightYellow
       )
-      .concat('\n')
   )
 
   data.errors.forEach(err => {
@@ -89,6 +90,45 @@ function display(data, verbosity) {
           .concat(`${err.description}`.white)
       )
   })
+}
+
+function displayBulk(data, verbosity) {
+  const { info, error, success, warning } = print
+
+  if (data.error) {
+    error(data.message)
+    return
+  }
+
+  if (!verbosity) {
+    for (var file of data) {
+      if (file.error) {
+        error(`${file.path}: `.concat(`${file.message}`))
+        continue
+      }
+    
+      if (file.ok) {
+        success(`${file.path}: `.concat(`${file.message}`))
+        continue
+      }
+
+      error(`${file.path}: FAILED`)
+    }
+
+    return
+  }
+
+  for (var file of data) {
+    if (file.ok) {
+      success(`${file.path}: `.concat(`${file.message}`))
+      console.log()
+      continue
+    }
+
+    display(file, verbosity)
+
+    console.log()
+  }
 }
 
 module.exports = command
